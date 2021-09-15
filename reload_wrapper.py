@@ -20,8 +20,8 @@ def run():
 
     :return: null
     """
+    import_mod(MODULES)
     while not keyboard.is_pressed('esc'):
-        print('test')
         time.sleep(1)
         reload()
 
@@ -34,10 +34,9 @@ def reload():
     """
     for module in MODULES:
         # Checks if the code has been modified in the past 2 seconds and reloads if so
-        if time.time() - os.path.getmtime(os.path.join(WORK_DIR, module)) < 2:
-            importlib.reload(sys.modules.get(module, 'sys'))
+        if time.time() - os.path.getmtime(os.path.join(WORK_DIR, module)) < 1:
+            importlib.reload(sys.modules.get(module.strip(".py"), 'sys'))
             print('reloaded')
-        print('file unchanged')
 
 def compare(path1, path2):
     """
@@ -59,5 +58,7 @@ def import_mod(modules):
     :param modules: str - List of modules to import
     :return:
     """
+    for module in modules:
+        importlib.import_module(module.strip(".py"), 'NewSchool')
 
     return
