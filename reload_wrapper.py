@@ -14,7 +14,7 @@ POLL_TIME = 1
 WORK_DIR = r"C:\Users\letha\PycharmProjects\NewSchool"
 
 
-def run():
+def run() -> None:
     """
     Main run loop
 
@@ -26,7 +26,7 @@ def run():
         reload()
 
 
-def reload():
+def reload() -> None:
     """
     Loads/Reloads the module in global variable modules
 
@@ -48,7 +48,7 @@ def reload():
             print(type(e).__name__ + ": ", end='')
             print(e)
 
-def compare(path1, path2):
+def compare(path1: str, path2: str) -> bool:
     """
     Compares two files
     :param path1: str
