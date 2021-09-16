@@ -33,10 +33,20 @@ def reload():
     :return: null
     """
     for module in MODULES:
-        # Checks if the code has been modified in the past 2 seconds and reloads if so
-        if time.time() - os.path.getmtime(os.path.join(WORK_DIR, module)) < 1:
-            importlib.reload(sys.modules.get(module.strip(".py"), 'sys'))
-            print('reloaded')
+        try:
+            # Checks if the code has been modified in the past 2 seconds and reloads if so
+            if time.time() - os.path.getmtime(os.path.join(WORK_DIR, module)) < 1:
+                # Shows user that module is reloaded
+                print("\033[1;33;45m" + ("-" * 25) + "Reloaded Module" + ("-" * 25) + "\033[0m")
+                importlib.reload(sys.modules.get(module.strip(".py"), 'sys'))
+
+
+        except TypeError:
+            import_mod([module])
+
+        except Exception as e:
+            print(type(e).__name__ + ": ", end='')
+            print(e)
 
 def compare(path1, path2):
     """
@@ -52,13 +62,16 @@ def compare(path1, path2):
             else:
                 return False
 
-def import_mod(modules):
+def import_mod(modules: list) -> None:
     """
-
+    This is the initial import of each module in the list of modules
     :param modules: str - List of modules to import
     :return:
     """
     for module in modules:
-        importlib.import_module(module.strip(".py"), 'NewSchool')
+        try:
+            importlib.import_module(module.strip(".py"), 'NewSchool')
 
-    return
+        except Exception as e:
+            print(type(e).__name__ + ": ", end='')
+            print(e)
