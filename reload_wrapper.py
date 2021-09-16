@@ -10,7 +10,7 @@ MODULES = ['test.py']
 # How long in seconds to poll for changes
 POLL_TIME = 1
 
-# Working director
+# Working directory
 WORK_DIR = r"C:\Users\letha\PycharmProjects\NewSchool"
 
 
@@ -31,7 +31,7 @@ def reload() -> None:
     """
     Loads/Reloads the module in global variable modules
 
-    :return: null
+    :return:
     """
     for module in MODULES:
         try:
@@ -46,8 +46,7 @@ def reload() -> None:
             import_mod([module])
 
         except Exception as e:
-            print(type(e).__name__ + ": ", end='')
-            print(e)
+            print(type(e).__name__ + ": ", e)
 
 def compare(path1: str, path2: str) -> bool:
     """
@@ -74,5 +73,4 @@ def import_mod(modules: list) -> None:
             importlib.import_module(module.strip(".py"), 'NewSchool')
 
         except Exception as e:
-            print(type(e).__name__ + ": ", end='')
-            print(e)
+            print(type(e).__name__ + ": ", e)
