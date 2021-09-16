@@ -20,6 +20,7 @@ def run() -> None:
 
     :return: null
     """
+    print("\033[1;31;40m Reload Loop Started \033[0m")
     import_mod(MODULES)
     while not keyboard.is_pressed('esc'):
         time.sleep(1)
